@@ -52,8 +52,17 @@ myfun();
 
 
 function counter () {
-    
+    static $number = 0;
+    $number++;
+    echo $number . "<br>";
 }
+
+counter();
+counter();
+counter();
+counter();
+counter();
+counter();
 ?>
 </body>
 </html>
