@@ -95,3 +95,15 @@ if($percentage >= 80.0) {
 }else {
     echo "<p>Grade : n/A</p>";
 }
+
+$input_email = "aliraza@gmail.com";
+$input_password = "12345678";
+
+const _EMAIL = "admin@gmail.com";
+const _PASSWORD = "password";
+
+if($input_email == _EMAIL && $input_password == _PASSWORD) {
+    echo "<p>Login Successfull</p>";
+}else  {
+    echo "<p>Invalid Login! Incorrect email or password</p>";
+}
