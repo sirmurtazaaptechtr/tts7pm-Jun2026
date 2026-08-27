@@ -1,11 +1,7 @@
 <?php
 include('header.php');
-
 $sql = "SELECT * FROM `products`";
-
-$result = mysqli_query($conn,$sql);
-
-// pr($result);
+$result = mysqli_query($conn, $sql);
 ?>
 <div class="container">
     <h1>Products</h1>
@@ -21,9 +17,7 @@ $result = mysqli_query($conn,$sql);
             </tr>
         </thead>
         <tbody>
-            <?php
-            while($row = mysqli_fetch_assoc($result)) {
-            ?>
+            <?php while($row = mysqli_fetch_assoc($result)) { ?>
             <tr>
                 <td><?php echo $row['ProductID'];?></td>
                 <td><?php echo $row['ProductName'];?></td>
@@ -32,9 +26,7 @@ $result = mysqli_query($conn,$sql);
                 <td><?php echo $row['Unit'];?></td>
                 <td><?php echo $row['Price'];?></td>
             </tr>
-            <?php
-            }
-            ?>
+            <?php } ?>
         </tbody>
     </table>
 </div>

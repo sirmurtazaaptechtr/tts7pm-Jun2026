@@ -1,10 +1,7 @@
 <?php
 include('header.php');
-
 $sql = "SELECT * FROM customers";
-
 $result = mysqli_query($conn, $sql);
-
 ?>
 <div class="container">
     <h1>Customers</h1>
@@ -21,9 +18,7 @@ $result = mysqli_query($conn, $sql);
         </tr>
     </thead>
     <tbody>
-        <?php
-        while($customer = mysqli_fetch_assoc($result)) {
-        ?>
+        <?php while($customer = mysqli_fetch_assoc($result)) { ?>
         <tr>
             <td><?php echo $customer['CustomerID'];?></td>
             <td><?php echo $customer['CustomerName'];?></td>
