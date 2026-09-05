@@ -1,4 +1,17 @@
-<?php 
+<?php
+    function pr ($data) {
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+    }
+
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    } 
+    
     $hostname = 'localhost';
     $username = 'root';
     $password = '';
