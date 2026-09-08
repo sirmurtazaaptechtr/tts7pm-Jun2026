@@ -55,8 +55,8 @@
             <label for="supplierSelect" class="form-label">Select Supplier</label>
             <span class="text-danger">* <?php echo $SupplierIDError;?></span>
             <select class="form-select" id="supplierSelect" name="SupplierID">
-                <?php while($supplier = mysqli_fetch_assoc($suppliers)) { ?>
                 <option value="0" <?php if($SupplierID == 0) { echo "selected"; }?>>Select Supplier</option>
+                <?php while($supplier = mysqli_fetch_assoc($suppliers)) { ?>
                 <option value="<?php echo $supplier['SupplierID']?>" <?php if($SupplierID == $supplier['SupplierID']) { echo "selected"; }?>><?php echo $supplier['SupplierName']; ?></option>
                 <?php } ?>
             </select>
@@ -65,8 +65,8 @@
             <label for="categorySelect" class="form-label">Select Category</label>
             <span class="text-danger">* <?php echo $CategoryIDError;?></span>
             <select class="form-select" id="categorySelect" name="CategoryID">
-                <?php while($category = mysqli_fetch_assoc($categories)) { ?>
                 <option value="0" <?php if($CategoryID == 0) { echo "selected"; } ?>>Select Category</option>
+                <?php while($category = mysqli_fetch_assoc($categories)) { ?>
                 <option value="<?php echo $category['CategoryID']?>" <?php if($CategoryID == $category['CategoryID']) { echo "selected"; } ?>><?php echo $category['CategoryName']; ?></option>
                 <?php } ?>
             </select>
