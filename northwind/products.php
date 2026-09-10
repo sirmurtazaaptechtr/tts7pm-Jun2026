@@ -8,6 +8,9 @@
 ?>
 <div class="container">
     <h1>All Products</h1>
+    <div class="mb-3">
+        <a type="button" class="btn btn-outline-primary" href="product.add.php">+ Add new Product</a>
+    </div>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -19,6 +22,7 @@
                 <th>Category Name</th>
                 <th>Unit</th>
                 <th>Price</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +36,10 @@
                 <td><?php echo $row['CategoryName']; ?></td>
                 <td><?php echo $row['Unit']; ?></td>
                 <td><?php echo $row['Price']; ?></td>
+                <td>
+                    <a type="button" class="btn btn-sm btn-outline-warning" href="product.edit.php?ProductID=<?php echo $row['ProductID']?>">Edit</a>
+                    <a type="button" class="btn btn-sm btn-outline-danger" href="">Delete</a>
+                </td>
             </tr>
             <?php } ?>
         </tbody>

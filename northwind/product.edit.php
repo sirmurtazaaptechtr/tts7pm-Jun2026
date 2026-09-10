@@ -1,6 +1,6 @@
 <?php 
     require('header.php');
-    $ProductName = $SupplierID = $CategoryID = $Unit = $Price = '';
+    $ProductID = $ProductName = $SupplierID = $CategoryID = $Unit = $Price = '';
     $ProductNameError = $SupplierIDError = $CategoryIDError = $UnitError = $PriceError = '';
 
     $supplier_sql = "SELECT * FROM suppliers ORDER BY SupplierName";
@@ -9,7 +9,26 @@
     $category_sql = "SELECT * FROM categories ORDER BY categoryName";
     $categories = mysqli_query($conn, $category_sql);
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['SubmitBtn'])) {
+    if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['ProductID'])) {        
+        $ProductID = test_input($_GET['ProductID']);
+
+        $products_sql = "SELECT * FROM products WHERE ProductID = $ProductID";
+        $products = mysqli_query($conn, $products_sql);
+        $product = mysqli_fetch_assoc($products);
+
+        $ProductName = $product['ProductName'];
+        $SupplierID = $product['SupplierID'];
+        $CategoryID = $product['CategoryID'];
+        $Unit = $product['Unit'];
+        $Price = $product['Price'];
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['SubmitBtn'])) {       
+
+        if (!empty($_POST["ProductID"])) {         
+            $ProductID = test_input($_POST["ProductID"]);
+        }        
+
         if (empty($_POST["ProductName"])) {
             $ProductNameError = "Product Name is required";
         } else {
@@ -41,9 +60,9 @@
         }        
         
         if(empty($ProductNameError) && empty($SupplierIDError) && empty($CategoryIDError) && empty($UnitError) && empty($PriceError)) {
-            $insert_sql = "INSERT INTO products (ProductName, SupplierID, CategoryID, Unit, Price) VALUES ('$ProductName', '$SupplierID', '$CategoryID', '$Unit', '$Price')";
+            $update_sql = "UPDATE `products` SET `ProductName` = '$ProductName', `CategoryID` = '$CategoryID', `SupplierID` = '$SupplierID', `Unit` = '$Unit', `Price` = '$Price'  WHERE `products`.`ProductID` = $ProductID";
 
-            if($is_inserted = mysqli_query($conn, $insert_sql)) {
+            if($is_updated = mysqli_query($conn, $update_sql)) {
                 header("Location:products.php");
                 exit();
             }
@@ -58,6 +77,10 @@
     <h2>Enter Product Details</h2>    
     <p><span class="text-danger">* required field</span></p>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product ID</label>            
+            <input type="text" readonly class="form-control" id="productId" name="ProductID" value="<?php echo $ProductID; ?>">            
+        </div>
         <div class="mb-3">
             <label for="productName" class="form-label">Product Name</label>
             <span class="text-danger">* <?php echo $ProductNameError;?></span>
@@ -93,7 +116,7 @@
             <span class="text-danger">* <?php echo $PriceError;?></span>
             <input type="text" class="form-control" id="price" name="Price" value="<?php echo $Price; ?>">            
         </div>        
-        <button type="submit" class="btn btn-primary" id="submitBtn" name="SubmitBtn">Submit</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn" name="SubmitBtn">Update</button>
     </form>
 </div>
 <?php require('footer.php'); ?>

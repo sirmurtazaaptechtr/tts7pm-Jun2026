@@ -10,6 +10,9 @@ $suppliers = mysqli_query($conn, $suppliers_sql);
 $shippers_sql = "SELECT * FROM shippers ORDER BY ShipperName";
 $shippers = mysqli_query($conn, $shippers_sql);
 
+$products_sql = "SELECT * FROM products ORDER BY ProductName";
+$products = mysqli_query($conn, $products_sql);
+
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     pr($_POST);
 }
@@ -43,6 +46,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php while($shipper = mysqli_fetch_assoc($shippers)) { ?>
             <option value="<?php echo $shipper['ShipperID']; ?>">
                 <?php echo $shipper['ShipperName'],' | ',$shipper['Phone']; ?>
+            </option>
+            <?php } ?>
+        </select>
+        <!-- Products Dropdown -->
+        <label class="form-label" for="productId">Prodcut</label>
+        <select class="form-select" name="ProductID" id="productId">
+            <option value="0">Select Product</option>
+            <?php while($product = mysqli_fetch_assoc($products)) { ?>
+            <option value="<?php echo $product['ProductID']; ?>">
+                <?php echo $product['ProductName']," | $", $product['Price']; ?>
             </option>
             <?php } ?>
         </select>
