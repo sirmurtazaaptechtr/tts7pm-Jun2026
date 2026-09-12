@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if(!$_SESSION['isLogin']) {        
+        header("Location:login.php");
+        exit();
+    }    
     function pr ($data) {
         echo "<pre>";
         print_r($data);

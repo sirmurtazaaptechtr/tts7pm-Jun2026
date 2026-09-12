@@ -1,5 +1,5 @@
 <?php
-    require('header.php');
+    require('header.php');    
     $sql = "SELECT * 
             FROM `products` AS p
             LEFT JOIN `suppliers` AS s ON p.SupplierID = s.SupplierID
