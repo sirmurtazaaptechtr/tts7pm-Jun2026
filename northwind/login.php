@@ -21,6 +21,7 @@ $password = '';
 $database = 'northwind';
 
 $conn = mysqli_connect($hostname, $username, $password, $database);
+
 $Username = $Password = '';
 $_SESSION['isLogin'] = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['LoginBtn'])) {
