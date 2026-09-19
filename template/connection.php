@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 // Healper Functions
 function pr ($data) {

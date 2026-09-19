@@ -25,7 +25,11 @@ $customers = mysqli_query($conn, $sql);
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">All Customers</h5>                        
+                        <h5 class="card-title">All Customers</h5>
+                        
+                        <div>
+                            <a href="customer.add.php" type="button" class="btn btn-primary">+ Add New Customer</a>
+                        </div>
 
                         <!-- Table with stripped rows -->
                         <table class="table table-striped datatable">
