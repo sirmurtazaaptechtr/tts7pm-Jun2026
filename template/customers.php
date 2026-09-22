@@ -4,6 +4,17 @@ include('header.php');
 $sql = "SELECT * FROM customers ORDER BY CustomerName";
 $customers = mysqli_query($conn, $sql);
 
+if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+    $CustomerID = test_input($_GET['id']);
+
+    $delete_sql = "DELETE FROM customers WHERE CustomerID = '$CustomerID'";
+
+    if($is_deleted = mysqli_query($conn, $delete_sql)) {
+        header("Location:customers.php");
+        exit();
+    }
+}
+
 ?>
 
 <main id="main" class="main">
@@ -26,7 +37,7 @@ $customers = mysqli_query($conn, $sql);
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">All Customers</h5>
-                        
+
                         <div>
                             <a href="customer.add.php" type="button" class="btn btn-primary">+ Add New Customer</a>
                         </div>
@@ -61,14 +72,24 @@ $customers = mysqli_query($conn, $sql);
                                     <td><?php echo $customer['PostalCode']?></td>
                                     <td><?php echo $customer['Country']?></td>
                                     <td>
-                                        <a href="customer.edit.php?id=<?php echo $customer['CustomerID']?>" class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="customer.delete.php?id=<?php echo $customer['CustomerID']?>" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="customer.edit.php?id=<?php echo $customer['CustomerID']?>"
+                                            class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="customer.delete.php?id=<?php echo $customer['CustomerID']?>"
+                                            class="btn btn-danger btn-sm">Delete</a>
+                                        <a 
+                                            href="customers.php?id=<?php echo $customer['CustomerID']?>" 
+                                            class="btn btn-link text-danger" 
+                                            name="DeleteBtn"
+                                            onclick="return confirm('Are you sure you want to delete this customer?');"
+                                        >
+                                            <i class="bi bi-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 <?php
                                 $srno++;
                                 }
-                                ?>                                
+                                ?>
                             </tbody>
                         </table>
                         <!-- End Table with stripped rows -->
