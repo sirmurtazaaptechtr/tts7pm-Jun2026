@@ -101,35 +101,38 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="pt-4 pb-2">
                                         <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                                         <p class="text-center small">Enter your username & password to login</p>
-                                    </div>                                 
-                        
+                                    </div>
 
-                                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="row g-3 needs-validation" novalidate>
+
+                                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post"
+                                        class="row g-3 needs-validation" novalidate>
 
                                         <?php if (!empty($errors)) : ?>
-                                            <div class="col-12">
-                                                <div class="alert alert-danger" role="alert">
+                                        <div class="col-12">
+                                            <div class="alert alert-danger" role="alert">
+                                                <ul>
                                                     <?php foreach ($errors as $error) : ?>
-                                                        <div><?php echo htmlspecialchars($error); ?></div>
+                                                    <li><?php echo htmlspecialchars($error); ?></li>
                                                     <?php endforeach; ?>
-                                                </div>
+                                                </ul>
                                             </div>
+                                        </div>
                                         <?php endif; ?>
 
                                         <div class="col-12">
                                             <label for="username" class="form-label">Username</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="Username" class="form-control"
-                                                    id="username" value="<?php echo htmlspecialchars($Username); ?>" required>
+                                                <input type="text" name="Username" class="form-control" id="username"
+                                                    value="<?php echo htmlspecialchars($Username); ?>" required>
                                                 <div class="invalid-feedback">Please enter your username.</div>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <label for="password" class="form-label">Password</label>
-                                            <input type="password" name="Password" class="form-control"
-                                                id="password" required>
+                                            <input type="password" name="Password" class="form-control" id="password"
+                                                required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
 
@@ -189,7 +192,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- TinyMCE (v7.1.0) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.1.0/tinymce.min.js"></script>
-    
+
     <!-- Template Validate JS File -->
     <script src="assets/vendor/php-email-form/validate.js"></script>
 

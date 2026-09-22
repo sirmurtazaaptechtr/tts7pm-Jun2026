@@ -1,6 +1,6 @@
 <?php
 include('header.php');
-$CustomerName = $ContactName = $Address = $City = $PostalCode = $Country = '';
+$CustomerID =$CustomerName = $ContactName = $Address = $City = $PostalCode = $Country = '';
 $errors = [];
 
 $city_sql = "SELECT DISTINCT City FROM customers ORDER BY City";
@@ -9,7 +9,30 @@ $cities = mysqli_query($conn, $city_sql);
 $country_sql = "SELECT DISTINCT Country FROM customers ORDER BY Country";
 $countries = mysqli_query($conn, $country_sql);
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+    $CustomerID = test_input($_GET['id']);
+
+    $sql = "SELECT * FROM customers WHERE CustomerID = '$CustomerID'";
+    $result = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($result) > 0) {
+        $customer = mysqli_fetch_assoc($result);
+
+        $CustomerName = $customer['CustomerName'];
+        $ContactName = $customer['ContactName'];
+        $Address = $customer['Address'];
+        $City = $customer['City'];
+        $PostalCode = $customer['PostalCode'];
+        $Country = $customer['Country'];
+    } else {
+        header("Location: customers.php");
+        exit();
+    }
+}
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['UpdateBtn'])) {
+    $CustomerID = test_input($_POST['CustomerID']);
+
     if(empty($_POST['CustomerName'])) {
         array_push($errors, "Customer name is required");
     }else {
@@ -28,9 +51,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $Country = test_input($_POST['Country']);
 
     if(empty($errors)) {
-        $insert_sql = "INSERT INTO customers (CustomerName, ContactName, Address, City, PostalCode, Country) VALUES ('$CustomerName', '$ContactName', '$Address', '$City', '$PostalCode', '$Country')";
+        $update_sql = "UPDATE customers SET CustomerName = '$CustomerName', ContactName = '$ContactName', Address = '$Address', City = '$City', PostalCode = '$PostalCode', Country = '$Country' WHERE CustomerID = '$CustomerID'";
 
-        if($is_created = mysqli_query($conn, $insert_sql)) {
+        if($is_updated = mysqli_query($conn, $update_sql)) {
             header("Location:customers.php");
             exit();
         }
@@ -41,12 +64,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Add New Customer</h1>
+        <h1>Edit Customer</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="customers.php">Customers</a></li>
-                <li class="breadcrumb-item active">Add New Customer</li>
+                <li class="breadcrumb-item active">Edit Customer</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -57,7 +80,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">New customer details</h5>
+                        <h5 class="card-title">Edit Customer</h5>
 
                         <!-- General Form Elements -->
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
@@ -73,6 +96,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             </div>
                             <?php endif; ?>
+
+                            <input type="hidden" name="CustomerID" value="<?php echo $CustomerID; ?>">
 
 
                             <div class="row mb-3">
@@ -137,8 +162,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             <div class="row mb-3">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary" id="addBtn" name="AddBtn">+
-                                        Add</button>
+                                    <button type="submit" class="btn btn-primary" id="updateBtn" name="UpdateBtn">Update Customer</button>
                                 </div>
                             </div>
 
