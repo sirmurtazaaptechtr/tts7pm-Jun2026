@@ -1,6 +1,6 @@
 <?php
 include('header.php');
-$CustomerID =$CustomerName = $ContactName = $Address = $City = $PostalCode = $Country = '';
+$CustomerID = $CustomerName = $ContactName = $Address = $City = $PostalCode = $Country = '';
 $errors = [];
 
 $city_sql = "SELECT DISTINCT City FROM customers ORDER BY City";
