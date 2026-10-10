@@ -57,6 +57,13 @@ $c1 = new Cat("Kitty");
 $c2 = new Cat("Fluffy");
 
 $d1->makeSound();
+$d1->eat();
+$d2->makeSound();
+$d2->eat();
+$c1->makeSound();
+$c1->eat();
+$c2->makeSound();
+$c2->eat();   
 $d2->makeSound();
 
 $c1->makeSound();

@@ -1,6 +1,7 @@
 <?php
 // Define the interface
 interface IAnimal {
+    public function eat();
     public function makeSound();
 }
 
@@ -9,6 +10,10 @@ class Dog implements IAnimal {
 
     public function __construct($name) {
         $this->name = $name;
+    }
+
+    public function eat() {
+        echo "<p>{$this->name} is eating dog food.</p>";
     }
 
     public function makeSound() {
@@ -25,6 +30,10 @@ class Cat implements IAnimal {
 
     public function makeSound() {
         echo "<p>{$this->name} says Meow!</p>";
+    }
+
+    public function eat() {
+        echo "<p>{$this->name} is eating cat food.</p>";
     }
 }
 
