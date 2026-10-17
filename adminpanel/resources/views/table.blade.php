@@ -1,5 +1,9 @@
 @extends('layout.master')
 
+@section('title')
+Data Tables
+@endsection
+
 @section('main')
     <main id="main" class="main">
 
