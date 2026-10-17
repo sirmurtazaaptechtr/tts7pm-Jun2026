@@ -278,11 +278,25 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="index.html">
+                <a class="nav-link " href="{{ route('index') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
+            
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('table') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Table</span>
+                </a>
+            </li><!-- End Table Nav -->
+            
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('form') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Form</span>
+                </a>
+            </li><!-- End Form Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
