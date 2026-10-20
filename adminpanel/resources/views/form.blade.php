@@ -4,6 +4,14 @@
 Form
 @endsection
 
+@push('style')
+<style>
+  * {
+    font-family: cursive
+  }
+</style>
+@endpush
+
 @section('main')
 <main id="main" class="main">
 
@@ -298,3 +306,10 @@ Form
 
     
 @endsection
+
+@push('script')
+<script>
+  console.log("this is exta JS");
+</script>
+    
+@endpush

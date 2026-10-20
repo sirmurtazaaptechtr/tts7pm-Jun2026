@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
-    public function ShowDashboard() {
+    public function Index () {
         return view('dashboard');
     }
 
-    public function ShowTable() {
-        return view('table');
+    public function ShowTable () {
+        $students = ["Hamza", "Mohib", "Shahwaiz", "Mustafa", "Yasir", "Muqaddar", "Abdul Hadi", "Mujtaba", "Abdul Latif"];
+
+        // return view('table',['students' => $students]);
+        return view('table', compact('students'));
     }
-    
-    public function ShowForm() {
+
+    public function ShowForm () {
         return view('form');
     }
 }
